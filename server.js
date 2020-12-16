@@ -2,35 +2,51 @@ require('dotenv').config()
 
 const express = require('express')
 const app = express()
-const bodyParser= require('body-parser')
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
-const MongoClient = require('mongodb').MongoClient
 
-MongoClient.connect('mongodb://localhost/greetingApp', { useUnifiedTopology: true })
-  .then(client => {
+mongoose.connect('mongodb://localhost:27017/greetingApp', { useNewUrlParser: true, useUnifiedTopology: true });
 
-    const db = client.db('greetingApp')
-    const quotesCollection = db.collection('sendgreeting')
+var db = mongoose.connection;
 
-    app.use(bodyParser.urlencoded({ extended: true }))
+var schema = new mongoose.Schema({
+  Name: String,
+  Wish: String,
+  date: Date,
+})
+
+var greetingsCollection = mongoose.model("sendgreeting", schema);
+
+db.on('error', console.log.bind(console, "connection error"));
+db.once('open', function (callback) {
+  console.log("connection successful");
+})
+
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/greetings.html')
 })
 
 app.post('/sendgreeting', (req, res) => {
-  quotesCollection.insertOne(req.body)
-  .then(result => {
-    console.log(result)
+  var name = req.body.Name
+  var wish = req.body.Wish
+  var date = new Date()
+  var myData = new greetingsCollection({ "Name": name, "Wish": wish, "date": date });
+
+  myData.save(function (err, document) {
+    if (err) return console.error(err)
+    res.send(document);
   })
-  .catch(error => console.error(error))
+})
+
+app.get('/receivegreeting', (req, res) => {
+  greetingsCollection.find({}, function (err, document) {
+    if (err) return console.error(err)
+    res.send(document);
+  })
 })
 
 app.listen(4000, () =>
   console.log('server started'))
-    console.log('Connected to Database')
-  })
-  .catch(error => console.error(error))
-
-

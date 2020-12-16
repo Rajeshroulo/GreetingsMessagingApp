@@ -40,106 +40,106 @@
 
   <style>
     .cards {
-    font-size: 1em;
-    overflow: hidden;
-    padding: 10px ;
-    border: none;
-    border-radius: .28571429rem;
-    box-shadow: 0 1px 3px 0 #1c1c1f, 0 0 0 1px #1c1c1f;
-}
+      font-size: 1em;
+      overflow: hidden;
+      padding: 10px;
+      border: none;
+      border-radius: .28571429rem;
+      box-shadow: 0 1px 3px 0 #1c1c1f, 0 0 0 1px #1c1c1f;
+    }
 
-.card-blocks {
-    font-size: 1em;
-    position: relative;
-    margin: 0;
-     padding: 10px ; 
-    border: none;
-    box-shadow: none;
-}
+    .card-blocks {
+      font-size: 1em;
+      position: relative;
+      margin: 0;
+      padding: 10px;
+      border: none;
+      box-shadow: none;
+    }
 
-.card-img-top {
-    display: block;
-    width: 100%;
-    height: auto;
-}
+    .card-img-top {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
-.card-titles {
-    font-size: 1.28571429em;
-    font-weight: 700;
-    line-height: 1.2857em;
-}
+    .card-titles {
+      font-size: 1.28571429em;
+      font-weight: 700;
+      line-height: 1.2857em;
+    }
 
-.card-texts {
-    clear: both;
-    margin-top: .5em;
-    color: rgba(0, 0, 0, .68);
-}
+    .card-texts {
+      clear: both;
+      margin-top: .5em;
+      color: rgba(0, 0, 0, .68);
+    }
 
-.card-footer {
-    font-size: 1em;
-    position: static;
-    top: 0;
-    left: 0;
-    max-width: 100%;
-    padding: .75em 1em;
-    color: rgba(0, 0, 0, .4);
-    border-top: 1px solid rgba(0, 0, 0, .05) !important;
-    background: #fff;
-}
+    .card-footer {
+      font-size: 1em;
+      position: static;
+      top: 0;
+      left: 0;
+      max-width: 100%;
+      padding: .75em 1em;
+      color: rgba(0, 0, 0, .4);
+      border-top: 1px solid rgba(0, 0, 0, .05) !important;
+      background: #fff;
+    }
 
-.card-inverse .btn {
-    border: 1px solid rgba(0, 0, 0, .05);
-}
+    .card-inverse .btn {
+      border: 1px solid rgba(0, 0, 0, .05);
+    }
 
-.profile {
-    position: absolute;
-    top: -12px;
-    display: inline-block;
-    overflow: hidden;
-    box-sizing: border-box;
-    width: 25px;
-    height: 25px;
-    margin: 0;
-    border: 1px solid #fff;
-    border-radius: 50%;
-}
+    .profile {
+      position: absolute;
+      top: -12px;
+      display: inline-block;
+      overflow: hidden;
+      box-sizing: border-box;
+      width: 25px;
+      height: 25px;
+      margin: 0;
+      border: 1px solid #fff;
+      border-radius: 50%;
+    }
 
-.profile-avatar {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
+    .profile-avatar {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
 
-.profile-inline {
-    position: relative;
-    top: 0;
-    display: inline-block;
-}
+    .profile-inline {
+      position: relative;
+      top: 0;
+      display: inline-block;
+    }
 
-.profile-inline ~ .card-title {
-    display: inline-block;
-    margin-left: 4px;
-    vertical-align: top;
-}
+    .profile-inline~.card-title {
+      display: inline-block;
+      margin-left: 4px;
+      vertical-align: top;
+    }
 
-.text-bold {
-    font-weight: 700;
-}
+    .text-bold {
+      font-weight: 700;
+    }
 
-.meta {
-    font-size: 1em;
-    color: rgba(0, 0, 0, .4);
-}
+    .meta {
+      font-size: 1em;
+      color: rgba(0, 0, 0, .4);
+    }
 
-.meta a {
-    text-decoration: none;
-    color: rgba(0, 0, 0, .4);
-}
+    .meta a {
+      text-decoration: none;
+      color: rgba(0, 0, 0, .4);
+    }
 
-.meta a:hover {
-    color: rgba(0, 0, 0, .87);
-}
+    .meta a:hover {
+      color: rgba(0, 0, 0, .87);
+    }
   </style>
 
 </head>
@@ -209,7 +209,7 @@
                 </button>
               </div>
 
-              <form method="POST" action="/sendgreeting">
+              <form id="submitgreeting">
                 <div class="modal-body">
                   <div>
                     <label>Name</label>
@@ -239,7 +239,7 @@
         <div class="container">
 
 
-          <div class="row">
+          <div class="row" id="sentgreetings">
             <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
               <div class="cards">
 
@@ -253,32 +253,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-              <div class="cards">
 
-                <div class="card-blocks">
-                  <h4 class="card-titles">Christmas</h4>
-                  <div class="meta">
-                  </div>
-                  <div class="card-texts">
-                    Merry Christmas... Sachin
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-              <div class="cards">
-
-                <div class="card-blocks">
-                  <h4 class="card-titles">New Year</h4>
-                  <div class="meta">
-                  </div>
-                  <div class="card-texts">
-                    Happy new year... Dilip
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -286,7 +261,65 @@
     </div>
   </div>
 
-  
+
+  <script>
+
+    $(document).ready(function () {
+      setTimeout(function () {
+        greetingGet();
+      }, 30);
+
+      $("#submitgreeting").submit(function (event) {
+        // Prevent the form from submitting via the browser.
+        event.preventDefault();
+        greetingPost();
+      });
+
+      function greetingPost() {
+        // PREPARE FORM DATA
+        var formData = jQuery("#submitgreeting").serialize();
+
+        // DO POST
+        $.ajax({
+          type: "POST",
+          url: "/sendgreeting",
+          data: formData,
+          success: function (result) {
+            $("#sentgreetings").append("<div class='col-sm-6 col-md-4 col-lg-3 mt-4'> <div class='cards'> <div class='card-blocks'> <h4 class='card-titles'>" + result.Name + "</h4> <div class='meta'> </div> <div class='card-texts'> " + result.Wish + " <hr> date:" + result.date + " <hr> id:" + result._id + "</div> </div> </div> </div>");
+          },
+          error: function (e) {
+            alert("Error!")
+            console.log("ERROR: ", e);
+          }
+        });
+
+
+      }
+
+
+      function greetingGet() {
+        $.ajax({
+          type: "GET",
+          url: "/receivegreeting",
+          success: function (data) {
+            $("#sentgreetings").empty();
+            $.each(data, function (i, result) {
+              $("#sentgreetings").append("<div class='col-sm-6 col-md-4 col-lg-3 mt-4'> <div class='cards'> <div class='card-blocks'> <h4 class='card-titles'>" + result.Name + " </h4> <div class='meta'> </div> <div class='card-texts'> " + result.Wish + "<hr> date:" + result.date + " <hr> id:" + result._id + "</div> </div> </div> </div>");
+
+            })
+          },
+          error: function (e) {
+            alert("Error!")
+            console.log("ERROR: ", e);
+          }
+        });
+
+      }
+
+    });
+
+  </script>
+
 </body>
 
 </html>
