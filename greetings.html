@@ -188,11 +188,11 @@
           <a href="#" class="list-group-item" data-toggle="modal" data-target="#basicModal">
             <i class="fa fa-plus"></i> Add
           </a>
-          <a href="#" class="list-group-item">
+          <a href="#" class="list-group-item" data-toggle="modal" data-target="#editModal">
             <i class="fa fa-edit"></i> Edit
           </a>
 
-          <a href="#" class="list-group-item">
+          <a href="#" class="list-group-item" data-toggle="modal" data-target="#deleteModal">
             <i class="fa fa-trash-o"></i> Delete
           </a>
         </div>
@@ -225,20 +225,77 @@
                   <button type="submit" name="Send" class="btn btn-primary">Send </button>
                 </div>
               </form>
-
-
             </div>
           </div>
         </div>
 
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Edit greeting</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <form id="editthegreeting">
+                <div class="modal-body">
+                  <div>
+                    <label>Id</label>
+                    <input type="text" id="Id" name="Id" placeholder="Enter Id">
+                  </div>
+                  <div>
+                    <label>Name</label>
+                    <input type="text" id="Name" name="Name" placeholder="Enter name">
+                  </div>
+                  <div>
+                    <label>Wish</label>
+                    <input type="text" id="Wish" name="Wish" placeholder="Enter wish">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="submit" name="Send" class="btn btn-primary">Send </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Delete greeting</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <form id="deletethegreeting">
+                <div class="modal-body">
+                  <div>
+                    <label>Id</label>
+                    <input type="text" name="Id" placeholder="Enter Id">
+                  </div>                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="submit" name="Send" class="btn btn-primary">Send </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
 
       </div>
 
 
       <div class="col-sm-8">
         <div class="container">
-
-
           <div class="row" id="sentgreetings">
             <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
               <div class="cards">
@@ -253,9 +310,7 @@
                 </div>
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
     </div>
@@ -263,7 +318,6 @@
 
 
   <script>
-
     $(document).ready(function () {
       setTimeout(function () {
         greetingGet();
@@ -273,7 +327,40 @@
         // Prevent the form from submitting via the browser.
         event.preventDefault();
         greetingPost();
+        
       });
+
+      $("#editthegreeting").submit(function (event) {
+        // Prevent the form from submitting via the browser.
+        event.preventDefault();
+        greetingPut();
+        greetingGet();
+
+      });
+
+      
+
+
+      function greetingPut() {
+        // PREPARE FORM DATA
+        var formData = jQuery("#editthegreeting").serialize();
+
+        // DO PUT
+        $.ajax({
+          type: "PUT",
+          url: "/editgreeting",
+          data: formData,
+          success: function (data) {
+            $("#editthegreeting")[0].reset();
+                $('#editModal').modal('toggle');
+            
+          },
+          error: function (e) {
+            alert("Error!")
+            console.log("ERROR: ", e);
+          }
+        });
+      }
 
       function greetingPost() {
         // PREPARE FORM DATA
@@ -286,14 +373,15 @@
           data: formData,
           success: function (result) {
             $("#sentgreetings").append("<div class='col-sm-6 col-md-4 col-lg-3 mt-4'> <div class='cards'> <div class='card-blocks'> <h4 class='card-titles'>" + result.Name + "</h4> <div class='meta'> </div> <div class='card-texts'> " + result.Wish + " <hr> date:" + result.date + " <hr> id:" + result._id + "</div> </div> </div> </div>");
+            $("#submitgreeting")[0].reset();
+                $('#basicModal').modal('toggle');
+            
           },
           error: function (e) {
             alert("Error!")
             console.log("ERROR: ", e);
           }
         });
-
-
       }
 
 
@@ -313,9 +401,9 @@
             console.log("ERROR: ", e);
           }
         });
-
       }
 
+      
     });
 
   </script>
