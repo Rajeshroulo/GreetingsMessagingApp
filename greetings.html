@@ -338,7 +338,13 @@
 
       });
 
-      
+      $("#deletethegreeting").submit(function (event) {
+        // Prevent the form from submitting via the browser.
+        event.preventDefault();
+        greetingDelete();
+        greetingGet();
+
+      });
 
 
       function greetingPut() {
@@ -403,6 +409,27 @@
         });
       }
 
+      function greetingDelete() {
+        // PREPARE FORM DATA
+        var formData = jQuery("#deletethegreeting").serialize();
+
+        // DO POST
+        $.ajax({
+          type: "POST",
+          url: "/deletegreeting",
+          data: formData,
+          success: function (data) {
+            $("#deletethegreeting")[0].reset();
+                $('#deleteModal').modal('toggle');
+                return false;
+            
+          },
+          error: function (e) {
+            alert("Error!")
+            console.log("ERROR: ", e);
+          }
+        });
+      }
       
     });
 

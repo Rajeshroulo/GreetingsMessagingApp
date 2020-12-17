@@ -63,6 +63,14 @@ app.get('/receivegreeting', (req, res) => {
   })
 })
 
+app.post('/deletegreeting', (req, res) => {
+  var id ={"_id":mongoose.Types.ObjectId(req.body.Id)}    
+
+  greetingsCollection.remove(id,function (err, document) {
+    if (err) return console.error(err)
+    console.log("Record deleted Successfully");
+    res.status(200).json({ message: 'success' });  })
+})
 
 app.listen(4000, () =>
   console.log('server started'))
